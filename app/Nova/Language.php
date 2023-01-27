@@ -1,9 +1,12 @@
 <?php
 
+//declare(strict_types = 1);
+
 namespace App\Nova;
 
 use Eminiarts\Tabs\Tab;
 use Eminiarts\Tabs\Tabs;
+use Illuminate\Database\Eloquent\Builder;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -11,11 +14,9 @@ use Laravel\Nova\Http\Requests\NovaRequest;
 use Nette\Utils\Strings;
 use Outl1ne\NovaSortable\Traits\HasSortableRows;
 
-
 class Language extends BaseResource
 {
     use HasSortableRows;
-
 
     /**
      * The model the resource corresponds to.
@@ -37,26 +38,24 @@ class Language extends BaseResource
      * @var array
      */
     public static $search = [
-        'id', 'code', 'locale', 'title'
+        'id', 'code', 'locale', 'title',
     ];
 
-
-    public static function indexQuery(NovaRequest $request, $query)
+    public static function indexQuery(NovaRequest $request, $query): Builder
     {
         if ($request->viaRelationship) {
             return self::relatableQuery($request, $query);
-        } else {
-            if (empty($request->get('orderBy'))) {
-                $query->getQuery()->orders = [];
-                return $query->orderBy('code', 'asc');
-            }
-
-            return $query;
         }
+        if (empty($request->get('orderBy'))) {
+            $query->getQuery()->orders = [];
+
+            return $query->orderBy('code', 'asc');
+        }
+
+        return $query;
     }
 
-
-    public static function relatableQuery(NovaRequest $request, $query)
+    public static function relatableQuery(NovaRequest $request, $query): Builder
     {
         if (Strings::contains($request->path(), 'associatable/language')) {
             $query->where('status', \App\Models\Language::STATUS_ENABLED);
@@ -65,14 +64,13 @@ class Language extends BaseResource
         return $query;
     }
 
-
     /**
      * Get the fields displayed by the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param NovaRequest $request
      * @return array
      */
-    public function fields(NovaRequest $request)
+    public function fields(NovaRequest $request): array
     {
         return [
             Tabs::make(__('language.detail', ['title' => $this->title ?: '']), [
@@ -113,10 +111,10 @@ class Language extends BaseResource
     /**
      * Get the cards available for the request.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param NovaRequest $request
      * @return array
      */
-    public function cards(NovaRequest $request)
+    public function cards(NovaRequest $request): array
     {
         return [];
     }
@@ -124,10 +122,10 @@ class Language extends BaseResource
     /**
      * Get the filters available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param NovaRequest $request
      * @return array
      */
-    public function filters(NovaRequest $request)
+    public function filters(NovaRequest $request): array
     {
         return [];
     }
@@ -135,10 +133,10 @@ class Language extends BaseResource
     /**
      * Get the lenses available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param NovaRequest $request
      * @return array
      */
-    public function lenses(NovaRequest $request)
+    public function lenses(NovaRequest $request): array
     {
         return [];
     }
@@ -146,10 +144,10 @@ class Language extends BaseResource
     /**
      * Get the actions available for the resource.
      *
-     * @param  \Laravel\Nova\Http\Requests\NovaRequest  $request
+     * @param NovaRequest $request
      * @return array
      */
-    public function actions(NovaRequest $request)
+    public function actions(NovaRequest $request): array
     {
         return [];
     }

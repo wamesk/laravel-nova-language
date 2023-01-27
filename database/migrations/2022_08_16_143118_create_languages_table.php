@@ -1,24 +1,24 @@
 <?php
 
+declare(strict_types = 1);
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\Schema;
 
-
-return new class extends Migration
-{
+return new class () extends Migration {
     /**
-    * Run the migrations.
-    *
-    * @return void
-    */
-    public function up()
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up(): void
     {
-        Schema::create('languages', function (Blueprint $table) {
-            if (Builder::$defaultMorphKeyType === 'ulid') {
+        Schema::create('languages', function (Blueprint $table): void {
+            if ('ulid' === Builder::$defaultMorphKeyType) {
                 $table->ulid('id')->primary();
-            } elseif (Builder::$defaultMorphKeyType === 'uuid') {
+            } elseif ('uuid' === Builder::$defaultMorphKeyType) {
                 $table->uuid('id')->primary();
             } else {
                 $table->id('id')->primary();
@@ -47,9 +47,8 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('languages');
     }
-
 };

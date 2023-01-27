@@ -1,10 +1,11 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Database\Seeders;
 
 use App\Models\Language;
 use Illuminate\Database\Seeder;
-
 
 /**
  * php artisan db:seed --class=LanguageSeeder
@@ -16,7 +17,7 @@ class LanguageSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $items = [
             ['code' => 'sk', 'locale' => 'sk_SK', 'title' => 'Slovenčina'],
@@ -27,5 +28,4 @@ class LanguageSeeder extends Seeder
             Language::updateOrCreate(['locale' => $item['locale']], $item);
         }
     }
-
 }
