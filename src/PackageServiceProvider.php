@@ -54,15 +54,15 @@ class PackageServiceProvider extends ServiceProvider
         $file = fopen($model, 'w');
         $idType = config('wame-commands.id-type') ?? 'ulid';
 
-        if ('ulid' === $idType) {
-            $use = "use Illuminate\Database\Eloquent\Concerns\HasUlids;\n";
-            $use2 = "    use HasUlids;\n";
+        if ('id' === $idType) {
+            $use = '';
+            $use2 = '';
         } elseif ('uuid' === $idType) {
             $use = "use Illuminate\Database\Eloquent\Concerns\HasUuids;\n";
             $use2 = "    use HasUuids;\n";
         } else {
-            $use = '';
-            $use2 = '';
+            $use = "use Illuminate\Database\Eloquent\Concerns\HasUlids;\n";
+            $use2 = "    use HasUlids;\n";
         }
 
         $lines = [
