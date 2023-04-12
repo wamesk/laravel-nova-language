@@ -52,7 +52,7 @@ class PackageServiceProvider extends ServiceProvider
     private function createModel($model): void
     {
         $file = fopen($model, 'w');
-        $idType = config('wame-commands.id-type');
+        $idType = config('wame-commands.id-type') ?? 'ulid';
 
         if ('ulid' === $idType) {
             $use = "use Illuminate\Database\Eloquent\Concerns\HasUlids;\n";
