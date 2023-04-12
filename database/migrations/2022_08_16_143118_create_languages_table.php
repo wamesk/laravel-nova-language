@@ -16,12 +16,12 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('languages', function (Blueprint $table): void {
-            if ('ulid' === Builder::$defaultMorphKeyType) {
-                $table->ulid('id')->primary();
+            if ('id' === Builder::$defaultMorphKeyType) {
+                $table->id('id')->primary();
             } elseif ('uuid' === Builder::$defaultMorphKeyType) {
                 $table->uuid('id')->primary();
             } else {
-                $table->id('id')->primary();
+                $table->ulid('id')->primary();
             }
 
             $table->string('code', 11);
