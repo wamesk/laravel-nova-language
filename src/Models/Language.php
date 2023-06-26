@@ -2,7 +2,7 @@
 
 declare(strict_types = 1);
 
-namespace App\Models;
+namespace Wame\LaravelNovaLanguage\Models;
 
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -11,7 +11,6 @@ use Spatie\EloquentSortable\SortableTrait;
 
 class Language extends BaseModel implements Sortable
 {
-    use HasUlids;
     use SoftDeletes;
     use SortableTrait;
 
