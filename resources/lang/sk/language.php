@@ -14,9 +14,11 @@ return [
     'field.code' => 'Kód',
     'field.code.help' => 'Napr. sk, cs, en-GB, en-US...',
     'field.locale' => 'Locale',
-    'field.locale.help' => 'Napr. sk_SK, cs_CZ, en_GB, en_US...',
+    'field.locale.help' => 'Napr. sk-SK, cs-CZ, en-GB, en-US...',
     'field.title' => 'Názov jazyka',
     'field.title.help' => 'Názov jazyka v danom jazyku.',
+    'field.main' => 'Hlavný',
+    'field.required' => 'Povinný',
     'field.status' => 'Aktívny',
     'field.status.help' => 'Zvoľte či je jazyk aktívny a bude ponúkaný v systéme.',
 

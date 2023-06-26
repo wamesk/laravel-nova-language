@@ -23,6 +23,7 @@
     ],
     "require": {
         "laravel/nova": "^4.0",
+        "rinvex/languages": "^7.1",
         "wamesk/laravel-commands": "^1.0"
     },
     "autoload": {

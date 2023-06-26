@@ -2,22 +2,32 @@
 
 declare(strict_types = 1);
 
-namespace Wame\LaravelNovaLanguage\Models;
+namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 
-class Language extends Model implements Sortable
+class Language extends BaseModel implements Sortable
 {
-    use HasFactory;
+    use HasUlids;
     use SoftDeletes;
     use SortableTrait;
 
+    public const MAIN_DISABLED = 0;
+    public const MAIN_ENABLED = 1;
+
     public const STATUS_DISABLED = 0;
     public const STATUS_ENABLED = 1;
+
+    protected $guarded = ['id'];
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'deleted_at' => 'datetime',
+    ];
 
     public $sortable = [
         'order_column_name' => 'sort',
@@ -27,11 +37,12 @@ class Language extends Model implements Sortable
         'nova_order_by' => 'ASC',
     ];
 
-    protected $guarded = ['id'];
+    /**
+     * @return \Rinvex\Language\Language|null
+     */
+    public function languageData(): ?\Rinvex\Language\Language
+    {
+        return $this->code ? language($this->code) : null;
+    }
 
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-        'deleted_at' => 'datetime',
-    ];
 }

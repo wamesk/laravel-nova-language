@@ -48,7 +48,6 @@ class PackageServiceProvider extends ServiceProvider
         }
     }
 
-
     private function createModel($model): void
     {
         $file = fopen($model, 'w');
@@ -83,4 +82,5 @@ class PackageServiceProvider extends ServiceProvider
         fwrite($file, implode('', $lines));
         fclose($file);
     }
+
 }
