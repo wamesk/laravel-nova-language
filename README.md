@@ -35,7 +35,19 @@ protected $policies = [
 ## Usage
 
 ```php
-BelongsTo::make(__('customer.field.language'), 'language', Language::class)
+Select::make(__('customer.field.language'), 'language_code')
     ->help(__('customer.field.language.help'))
-    ->withoutTrashed()
+    ->options(fn () => LanguageController::getListForSelect())
+    ->searchable()
+    ->required()
+    ->rules('required')
+    ->onlyOnForms(),
+
+BelongsTo::make(__('customer.field.language'), 'language', Language::class)
+    ->displayUsing(fn () => LanguageController::displayUsing($request, $this))
+    ->sortable()
+    ->filterable()
+    ->showOnPreview()
+    ->exceptOnForms()
+    ->hideFromIndex(),
 ```
