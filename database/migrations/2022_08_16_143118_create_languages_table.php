@@ -31,8 +31,8 @@ return new class extends Migration
             $table->boolean('main')->default(false);
             $table->boolean('required')->default(false);
             $table->boolean('status')->default(true);
-            $table->timestamps();
-            $table->softDeletes();
+            $table->datetimes();
+            $table->softDeletesDatetime();
 
             $table->index('code');
             $table->index('locale');
