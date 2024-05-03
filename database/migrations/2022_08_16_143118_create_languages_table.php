@@ -2,9 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\Facades\Schema;
-
 
 return new class extends Migration
 {
@@ -13,19 +11,11 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('languages', function (Blueprint $table) {
-            if (Builder::$defaultMorphKeyType === 'ulid') {
-                $table->ulid('id')->primary();
-            } elseif (Builder::$defaultMorphKeyType === 'uuid') {
-                $table->uuid('id')->primary();
-            } else {
-                $table->id('id')->primary();
-            }
-
+            $table->char('id', 5)->primary();
             $table->string('code', 2);
-            $table->char('locale', 5)->nullable();
             $table->string('title', 50);
             $table->unsignedTinyInteger('sort')->default(0);
             $table->boolean('main')->default(false);
@@ -35,25 +25,21 @@ return new class extends Migration
             $table->softDeletesDatetime();
 
             $table->index('code');
-            $table->index('locale');
-            $table->unique('locale');
             $table->index('sort');
             $table->index('main');
             $table->index('status');
             $table->index(['status', 'code']);
-            $table->index(['status', 'locale']);
+            $table->index(['status', 'id']);
         });
     }
-
 
     /**
      * Reverse the migrations.
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('languages');
     }
-
 };

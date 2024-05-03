@@ -1,6 +1,7 @@
 {
     "name": "wamesk/laravel-nova-language",
     "description": "Laravel Nova 4 Language field.",
+    "version": "3.0.0",
     "keywords": [
         "laravel",
         "nova",
@@ -23,18 +24,18 @@
     ],
     "require": {
         "laravel/nova": "^4.0",
-        "rinvex/languages": "^7.1",
-        "wamesk/laravel-commands": "^1.0"
+        "rinvex/languages": "^7.1"
     },
     "autoload": {
         "psr-4": {
-            "Wame\\LaravelNovaLanguage\\": "src/"
+            "Wame\\LaravelNovaLanguage\\": "src/",
+            "Wame\\LaravelNovaLanguage\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Wame\\LaravelNovaLanguage\\PackageServiceProvider"
+                "Wame\\LaravelNovaLanguage\\Providers\\PackageServiceProvider"
             ]
         }
     },

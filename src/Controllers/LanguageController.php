@@ -4,28 +4,21 @@ declare(strict_types = 1);
 
 namespace Wame\LaravelNovaLanguage\Controllers;
 
-use App\Http\Controllers\BaseController;
-use App\Models\Language;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Http\Requests\ResourceIndexRequest;
+use Wame\LaravelNovaLanguage\Enums\LanguageStatusEnum;
+use Wame\LaravelNovaLanguage\Models\Language;
 
-class LanguageController extends BaseController
+class LanguageController extends Controller
 {
-    /**
-     * @return Language
-     */
-    public static function model(): Language
-    {
-        return new Language;
-    }
-
     /**
      * @return Collection
      */
     public static function getActiveCodes(): Collection
     {
-        return Language::query()->where('deleted_at', null)->where('status', Language::STATUS_ENABLED)->get()->pluck('code', 'locale');
+        return Language::query()->where('deleted_at', null)->where('status', LanguageStatusEnum::ENABLED)->get()->pluck('code', 'locale');
     }
 
     /**

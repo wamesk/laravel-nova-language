@@ -3,7 +3,6 @@
 namespace Wame\LaravelNovaLanguage\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use App\Models\Language;
 
 trait HasLanguage
 {
