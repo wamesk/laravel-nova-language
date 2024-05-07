@@ -20,6 +20,8 @@ class PackageServiceProvider extends ServiceProvider
         Nova::resources([
             \Wame\LaravelNovaLanguage\Nova\Language::class,
         ]);
+
+        $this->loadTranslationsFrom(__DIR__ . '../../resources/lang', 'laravel-nova-language');
     }
 
     /**
