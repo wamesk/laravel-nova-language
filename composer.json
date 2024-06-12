@@ -1,7 +1,7 @@
 {
     "name": "wamesk/laravel-nova-language",
     "description": "Laravel Nova 4 Language field.",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "keywords": [
         "laravel",
         "nova",
@@ -30,7 +30,10 @@
         "psr-4": {
             "Wame\\LaravelNovaLanguage\\": "src/",
             "Wame\\LaravelNovaLanguage\\Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "src/Utils/helpers.php"
+        ]
     },
     "extra": {
         "laravel": {

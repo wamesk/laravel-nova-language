@@ -6,8 +6,10 @@ namespace Wame\LaravelNovaLanguage\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Http\Requests\ResourceIndexRequest;
+use Wame\LaravelNovaLanguage\Enums\LanguageRequiredEnum;
 use Wame\LaravelNovaLanguage\Enums\LanguageStatusEnum;
 use Wame\LaravelNovaLanguage\Models\Language;
 
@@ -75,6 +77,24 @@ class LanguageController extends Controller
 
             return $name . ' (' . $model->language_code . ')';
         }
+    }
+
+    /**
+     * Usage
+     * ->rulesFor(...LanguageController::translatableRequired())
+     *
+     * @return array
+     */
+    public static function translatableRequired(): array
+    {
+        $langs = Cache::store('file')->get('languages-required');
+
+        if (!$langs) {
+            $langs = Language::query()->where('required', LanguageRequiredEnum::ENABLED)->pluck('code')->toArray();
+            Cache::store('file')->put('languages-required', $langs);
+        }
+
+        return [$langs, ['required']];
     }
 
 }
