@@ -6,20 +6,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 trait HasLanguage
 {
-    /**
-     * @return BelongsTo
-     */
     public function language(): BelongsTo
     {
-        return $this->belongsTo(Language::class, 'language_code', 'locale');
+        return $this->belongsTo(Language::class, 'language_id');
     }
 
-    /**
-     * @return Language|null
-     */
     public function languageData(): ?Language
     {
-        return $this->lanuage_code ? language($this->lanuage_code) : null;
+        return $this->lanuage_id ? language($this->lanuage_id) : null;
     }
 
 }

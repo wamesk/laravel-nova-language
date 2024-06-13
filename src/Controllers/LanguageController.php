@@ -20,7 +20,7 @@ class LanguageController extends Controller
      */
     public static function getActiveCodes(): Collection
     {
-        return Language::query()->where('deleted_at', null)->where('status', LanguageStatusEnum::ENABLED)->get()->pluck('code', 'locale');
+        return Language::query()->where('deleted_at', null)->where('status', LanguageStatusEnum::ENABLED)->get()->pluck('code', 'id');
     }
 
     /**
@@ -60,14 +60,14 @@ class LanguageController extends Controller
      */
     public static function displayUsing($request, $model): ?string
     {
-        if (!$model->language_code) {
+        if (!$model->language_id) {
             return null;
         } elseif ($request instanceof ResourceIndexRequest) {
-            return $model->language_code;
+            return $model->language_id;
         } else {
             $language = $model->language;
             $languageData = $language->languageData();
-            $culture = $languageData->getCulture($model->language_code);
+            $culture = $languageData->getCulture($model->language_id);
 
             if ($culture) {
                 $name = $culture['name'];
@@ -75,7 +75,7 @@ class LanguageController extends Controller
                 $name = $languageData->getName();
             }
 
-            return $name . ' (' . $model->language_code . ')';
+            return $name . ' (' . $model->language_id . ')';
         }
     }
 
