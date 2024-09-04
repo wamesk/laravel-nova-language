@@ -1,7 +1,7 @@
 {
     "name": "wamesk/laravel-nova-language",
     "description": "Laravel Nova 4 Language field.",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "keywords": [
         "laravel",
         "nova",
