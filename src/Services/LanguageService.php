@@ -2,9 +2,8 @@
 
 declare(strict_types = 1);
 
-namespace Wame\LaravelNovaLanguage\Controllers;
+namespace Wame\LaravelNovaLanguage\Services;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -13,19 +12,13 @@ use Wame\LaravelNovaLanguage\Enums\LanguageRequiredEnum;
 use Wame\LaravelNovaLanguage\Enums\LanguageStatusEnum;
 use Wame\LaravelNovaLanguage\Models\Language;
 
-class LanguageController extends Controller
+class LanguageService
 {
-    /**
-     * @return Collection
-     */
     public static function getActiveCodes(): Collection
     {
-        return Language::query()->where('deleted_at', null)->where('status', LanguageStatusEnum::ENABLED)->get()->pluck('code', 'id');
+        return Language::query()->whereNull('deleted_at')->where('status', LanguageStatusEnum::ENABLED)->get()->pluck('code', 'id');
     }
 
-    /**
-     * @return array
-     */
     public static function getListForSelect(): array
     {
         $list = self::getActiveCodes();
@@ -50,14 +43,6 @@ class LanguageController extends Controller
         return $return;
     }
 
-    /**
-     * Helper for display using
-     *
-     * @param NovaRequest $request
-     * @param Language $model
-     *
-     * @return string|null
-     */
     public static function displayUsing($request, $model): ?string
     {
         if (!$model->language_id) {
@@ -79,12 +64,6 @@ class LanguageController extends Controller
         }
     }
 
-    /**
-     * Usage
-     * ->rulesFor(...LanguageController::translatableRequired())
-     *
-     * @return array
-     */
     public static function translatableRequired(): array
     {
         $langs = Cache::store('file')->get('languages-required');

@@ -12,9 +12,7 @@ return [
     'update.button' => 'Upravit jazyk',
 
     'field.code' => 'Kód',
-    'field.code.help' => 'Např. sk, cs, en-GB, en-US...',
-    'field.locale' => 'Lokalizace',
-    'field.locale.help' => 'Např. sk-SK, cs-CZ, en-GB, en-US...',
+    'field.code.help' => 'Např. sk, cs, en...',
     'field.title' => 'Název jazyka',
     'field.title.help' => 'Název jazyka v daném jazyce.',
     'field.main' => 'Hlavní',

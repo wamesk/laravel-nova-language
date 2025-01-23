@@ -12,9 +12,7 @@ return [
     'update.button' => 'Edit language',
 
     'field.code' => 'Code',
-    'field.code.help' => 'E.g. sk, cs, en-GB, en-US...',
-    'field.locale' => 'Locale',
-    'field.locale.help' => 'E.g. sk-SK, cs-CZ, en-GB, en-US...',
+    'field.code.help' => 'E.g. sk, cs, en...',
     'field.title' => 'Language Name',
     'field.title.help' => 'The name of the language in that language.',
     'field.main' => 'Main',

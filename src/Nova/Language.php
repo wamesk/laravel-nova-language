@@ -6,14 +6,13 @@ namespace Wame\LaravelNovaLanguage\Nova;
 
 use App\Nova\Resource;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Nette\Utils\Strings;
+use Laravel\Nova\Tabs\Tab;
 use Outl1ne\NovaSortable\Traits\HasSortableRows;
-use ShuvroRoy\NovaTabs\Tab;
-use ShuvroRoy\NovaTabs\Tabs;
 use Wame\LaravelNovaLanguage\Enums\LanguageMainEnum;
 use Wame\LaravelNovaLanguage\Enums\LanguageRequiredEnum;
 use Wame\LaravelNovaLanguage\Enums\LanguageStatusEnum;
@@ -61,7 +60,7 @@ class Language extends Resource
 
     public static function relatableQuery(NovaRequest $request, $query): Builder
     {
-        if (Strings::contains($request->path(), 'associatable/language')) {
+        if (Str::contains($request->path(), 'associatable/language')) {
             $query->where('status', LanguageStatusEnum::ENABLED);
         }
 
@@ -77,7 +76,7 @@ class Language extends Resource
     public function fields(NovaRequest $request): array
     {
         return [
-            Tabs::make(__('laravel-nova-language::language.detail', ['title' => $this->title ?: '']), [
+            Tab::group(null, [
                 Tab::make(__('laravel-nova-language::language.singular'), [
                     ID::make()
                         ->sortable()

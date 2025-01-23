@@ -10,6 +10,6 @@ if (!function_exists('translatableRequired'))
      */
     function translatableRequired(): array
     {
-        return \Wame\LaravelNovaLanguage\Controllers\LanguageController::translatableRequired();
+        return \Wame\LaravelNovaLanguage\Services\LanguageService::translatableRequired();
     }
 }

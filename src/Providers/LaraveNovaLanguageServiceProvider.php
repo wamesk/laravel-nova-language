@@ -8,7 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Nova;
 use Wame\LaravelNovaLanguage\Models\Language;
 
-class PackageServiceProvider extends ServiceProvider
+class LaraveNovaLanguageServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
