@@ -1,4 +1,4 @@
-# Laravel Nova 5 Language
+# Laravel Nova Language
 
 
 
