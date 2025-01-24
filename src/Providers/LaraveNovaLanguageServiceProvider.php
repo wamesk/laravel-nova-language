@@ -4,11 +4,13 @@ declare(strict_types = 1);
 
 namespace Wame\LaravelNovaLanguage\Providers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Nova\Nova;
 use Wame\LaravelNovaLanguage\Models\Language;
+use Wame\LaravelNovaLanguage\Policies\LanguagePolicy;
 
-class PackageServiceProvider extends ServiceProvider
+class LaraveNovaLanguageServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -17,11 +19,11 @@ class PackageServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'laravel-nova-language');
+
         Nova::resources([
             \Wame\LaravelNovaLanguage\Nova\Language::class,
         ]);
-
-        $this->loadTranslationsFrom(__DIR__ . '/../../resources/lang', 'laravel-nova-language');
     }
 
     /**
@@ -34,5 +36,7 @@ class PackageServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
         
         Language::shouldBeStrict();
+
+        Gate::policy(Language::class, LanguagePolicy::class);
     }
 }

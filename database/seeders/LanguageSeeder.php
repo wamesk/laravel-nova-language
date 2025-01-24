@@ -8,7 +8,7 @@ use Wame\LaravelNovaLanguage\Enums\LanguageMainEnum;
 use Wame\LaravelNovaLanguage\Models\Language;
 
 /**
- * php artisan db:seed --class=LanguageSeeder
+ * php artisan db:seed --class=Wame\LaravelNovaLanguage\Database\Seeders\LanguageSeeder
  */
 class LanguageSeeder extends Seeder
 {

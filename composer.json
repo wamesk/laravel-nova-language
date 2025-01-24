@@ -1,11 +1,11 @@
 {
     "name": "wamesk/laravel-nova-language",
-    "description": "Laravel Nova 4 Language field.",
-    "version": "3.0.5",
+    "description": "Laravel Nova Language field.",
+    "version": "5.0.0",
     "keywords": [
         "laravel",
         "nova",
-        "nova4",
+        "nova5",
         "language",
         "field"
     ],
@@ -16,14 +16,8 @@
             "homepage": "https://wame.sk"
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://nova.laravel.com"
-        }
-    ],
     "require": {
-        "laravel/nova": "^4.0",
+        "laravel/nova": "^5.0",
         "rinvex/languages": "^7.1"
     },
     "autoload": {
@@ -38,7 +32,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Wame\\LaravelNovaLanguage\\Providers\\PackageServiceProvider"
+                "Wame\\LaravelNovaLanguage\\Providers\\LaraveNovaLanguageServiceProvider"
             ]
         }
     },

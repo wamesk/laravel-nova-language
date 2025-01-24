@@ -1,10 +1,10 @@
-# Laravel Nova 4 Language
+# Laravel Nova Language
 
 
 
 ## Requirements
 
-- `laravel/nova: ^4.0`
+- `laravel/nova: ^5.0`
 
 
 ## Installation
@@ -21,30 +21,14 @@ php artisan migrate
 php artisan db:seed --class=LanguageSeeder
 ```
 
-Add Policy to `./app/Providers/AuthServiceProvider.php`
-
-```php
-protected $policies = [
-    'App\Models\Language' => 'Wame\LaravelNovaLanguage\Policies\LanguagePolicy',
-];
-```
-
 ## Usage
 
 ```php
-Select::make(__('laravel-nova-language::customer.field.language'), 'language_code')
-    ->help(__('laravel-nova-language::customer.field.language.help'))
-    ->options(fn () => LanguageController::getListForSelect())
-    ->searchable()
-    ->required()
-    ->rules('required')
-    ->onlyOnForms(),
-
-BelongsTo::make(__('laravel-nova-language::customer.field.language'), 'language', Language::class)
-    ->displayUsing(fn () => LanguageController::displayUsing($request, $this))
+BelongsTo::make(__('laravel-nova-country::country.field.language'), 'language', Language::class)
+    ->help(__('laravel-nova-country::country.field.language.help'))
+    ->withoutTrashed()
     ->sortable()
     ->filterable()
-    ->showOnPreview()
-    ->exceptOnForms()
-    ->hideFromIndex(),
+    ->required()
+    ->showOnPreview(),
 ```

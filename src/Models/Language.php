@@ -11,6 +11,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Wame\LaravelNovaLanguage\Enums\LanguageMainEnum;
+use Wame\LaravelNovaLanguage\Enums\LanguageRequiredEnum;
+use Wame\LaravelNovaLanguage\Enums\LanguageStatusEnum;
 
 /**
  * 
@@ -51,13 +54,11 @@ class Language extends Model implements Sortable
     use SortableTrait;
     use HasUlids;
 
-    protected $guarded = ['id'];
-
-    protected $casts = [
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
-        'deleted_at' => 'datetime',
+    protected $appends = [
+        'language_data',
     ];
+
+    protected $guarded = ['id'];
 
     public array $sortable = [
         'order_column_name' => 'sort',
@@ -67,13 +68,18 @@ class Language extends Model implements Sortable
         'nova_order_by' => 'ASC',
     ];
 
-    protected $appends = [
-        'language_data',
-    ];
+    protected function casts(): array
+    {
+        return [
+            'main' => LanguageMainEnum::class,
+            'required' => LanguageRequiredEnum::class,
+            'status' => LanguageStatusEnum::class,
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
+        ];
+    }
 
-    /**
-     * @return \Rinvex\Language\Language|null
-     */
     public function getLanguageDataAttribute(): ?\Rinvex\Language\Language
     {
         return $this->code ? language($this->code) : null;
