@@ -52,7 +52,7 @@ class Language extends Resource
         if (empty($request->get('orderBy'))) {
             $query->getQuery()->orders = [];
 
-            return $query->orderBy('code', 'asc');
+            return $query->orderByDesc('main')->orderByDesc('status')->orderBy('id');
         }
 
         return $query;
@@ -80,13 +80,15 @@ class Language extends Resource
                 Tab::make(__('laravel-nova-language::language.singular'), [
                     ID::make()
                         ->sortable()
-                        ->showOnPreview(),
+                        ->showOnPreview()
+                        ->showWhenPeeking(),
 
                     Text::make(__('laravel-nova-language::language.field.code'), 'code')
                         ->sortable()
                         ->filterable()
                         ->exceptOnForms()
-                        ->showOnPreview(),
+                        ->showOnPreview()
+                        ->showWhenPeeking(),
 
                     Text::make(__('laravel-nova-language::language.field.title'), 'title')
                         ->help(__('laravel-nova-language::language.field.title.help'))
@@ -94,7 +96,8 @@ class Language extends Resource
                         ->filterable()
                         ->required()
                         ->rules('required')
-                        ->showOnPreview(),
+                        ->showOnPreview()
+                        ->showWhenPeeking(),
 
                     Boolean::make(__('laravel-nova-language::language.field.main'), 'main')
                         ->default(LanguageMainEnum::DISABLED)
@@ -113,7 +116,8 @@ class Language extends Resource
                         ->default(LanguageStatusEnum::ENABLED)
                         ->sortable()
                         ->filterable()
-                        ->showOnPreview(),
+                        ->showOnPreview()
+                        ->showWhenPeeking(),
                 ]),
             ])->withToolbar(),
         ];
